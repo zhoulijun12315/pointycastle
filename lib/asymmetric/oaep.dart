@@ -12,6 +12,8 @@ import "package:pointycastle/src/registry/registry.dart";
 import "package:pointycastle/src/impl/base_asymmetric_block_cipher.dart";
 import "package:pointycastle/random/fortuna_random.dart";
 import "package:pointycastle/digests/sha1.dart";
+import "package:pointycastle/digests/sha3.dart";
+import "package:pointycastle/digests/sha256.dart";
 
 /// RSAES-OAEP v2.0
 ///
@@ -45,6 +47,7 @@ class OAEPEncoding extends BaseAsymmetricBlockCipher {
           });
 
   /// Hash function used by the EME-OAEP (Encoding Method for Encryption OAEP).
+  // MARK: MegaSDK need hash is SHA256Digest
   // Digest hash = SHA1Digest();
   Digest hash = SHA256Digest();
 
@@ -55,6 +58,7 @@ class OAEPEncoding extends BaseAsymmetricBlockCipher {
   ///
   /// Note: in this implementation the encoding parameters is always zero
   /// octets. There is no mechanism to provide encoding parameters.
+  // MARK: MegaSDK need hash is SHA256Digest
   // Uint8List defHash = Uint8List(SHA1Digest().digestSize);
 
   Uint8List defHash = Uint8List(SHA256Digest().digestSize);
@@ -64,6 +68,7 @@ class OAEPEncoding extends BaseAsymmetricBlockCipher {
   bool _forEncryption;
 
   OAEPEncoding(this._engine) {
+    // MARK: MegaSDK need SHA3_256 doFinal
     // SHA1Digest().doFinal(defHash, 0);
 
     SHA3Digest(256).doFinal(defHash, 0);
